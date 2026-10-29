@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brown Sugar Rush | David-Mihai Bagu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <!-- "../" because this page is inside the projects/ folder -->
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">David-Mihai Bagu</a>
+      <nav>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back" href="../index.html#projects">← Back to projects</a>
+
+    <!-- Replace this div with a video or GIF, for example:
+         <video class="project-hero" src="../assets/video/brown-sugar-rush.mp4" autoplay muted loop playsinline></video>
+         or a YouTube embed:
+         <iframe class="project-hero" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+    <div class="project-hero">Gameplay video / GIF goes here</div>
+
+    <div class="project-layout">
+
+      <!-- ===== Main content ===== -->
+      <article>
+        <h1>Brown Sugar Rush</h1>
+        <p>[EDIT ME: Short intro. What is the game, what's the goal, and what makes it fun?]</p>
+
+        <h2>My contributions</h2>
+        <ul class="contrib">
+          <li>[System you built #1, e.g. player movement / controls]</li>
+          <li>[System you built #2, e.g. scoring, spawning, UI]</li>
+          <li>Ported the game to Android with touch controls</li>
+        </ul>
+
+        <h2>[Feature name, e.g. Touch controls]</h2>
+        <p>[EDIT ME: Explain one system you're proud of. What problem did it solve, how did you approach it, and what would you improve? Recruiters love this part.]</p>
+
+        <pre><code>// Replace with a short, readable snippet of YOUR code (10–25 lines)
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private float speed = 5f;
+
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            // ...
+        }
+    }
+}</code></pre>
+
+        <h2>What I learned</h2>
+        <p>[EDIT ME: One or two takeaways, e.g. what you learned about mobile performance, or teamwork.]</p>
+      </article>
+
+      <!-- ===== Info sidebar ===== -->
+      <aside class="sidebar">
+        <h3>Duration</h3>
+        <p>[X weeks] · [month year]</p>
+
+        <h3>Role</h3>
+        <p><i class="tag">[Gameplay programmer]</i></p>
+
+        <h3>Team</h3>
+        <p>[Solo / X developers] · Hanze</p>
+
+        <h3>Tools</h3>
+        <p><i class="tag">Unity</i> <i class="tag">C#</i> <i class="tag">Android</i></p>
+
+        <a class="btn primary" href="https://YOUR-NAME.itch.io/brown-sugar-rush" target="_blank">Play on itch.io</a>
+        <a class="btn" href="https://github.com/YOUR-USERNAME/brown-sugar-rush" target="_blank">View code</a>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© David-Mihai Bagu 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>

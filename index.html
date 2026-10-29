@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>David Bagu – Game Programmer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David-Mihai Bagu | Game Programmer</title>
+  <meta name="description" content="Portfolio of David-Mihai Bagu, game programmer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hi, I'm David</h1>
-  <p>Game programmer. Portfolio coming soon.</p>
+
+  <header>
+    <div class="container">
+      <a href="#" class="logo">David-Mihai Bagu</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about">
+        <!-- Replace with your photo: put it in assets/img/ and use <img class="about-photo" src="assets/img/me.jpg" alt="David"> -->
+        <div class="about-photo"></div>
+
+        <div>
+          <p>Hi, I'm David, a <strong>game programmer</strong> studying Creative Media and Game Technologies at <strong>Hanze University of Applied Sciences</strong> in Groningen.</p>
+          <p>[EDIT ME: What do you like programming? Gameplay systems, tools, mobile, AI? Mention Unity / C# or whatever you use most.]</p>
+          <p>[EDIT ME: A line about you outside programming: games you play, hobbies.]</p>
+
+          <div class="socials">
+            <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank">LinkedIn</a>
+            <a class="btn" href="https://YOUR-NAME.itch.io" target="_blank">itch.io</a>
+          </div>
+          <a class="btn primary" href="assets/David-Mihai-Bagu-CV.pdf" target="_blank">Download CV</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects">
+
+        <!-- Project card: copy this whole <a> block to add another project -->
+        <a class="card" href="projects/brown-sugar-rush.html">
+          <!-- Replace with: <img class="card-thumb" src="assets/img/brown-sugar-rush.gif" alt="Brown Sugar Rush gameplay"> -->
+          <div class="card-thumb"></div>
+          <div class="card-body">
+            <h3>Brown Sugar Rush</h3>
+            <div class="meta">
+              <span>🕒 [X weeks] · [month year – month year]</span>
+              <span>🛠 <i class="tag">Unity</i><i class="tag">C#</i><i class="tag">Android</i></span>
+              <span>👤 <i class="tag">[Gameplay programmer]</i><i class="tag">[Team of X]</i><i class="tag">Hanze</i></span>
+            </div>
+            <p>[EDIT ME: One or two sentences about what the game is.]</p>
+            <ul class="contrib">
+              <li>[Thing you built #1]</li>
+              <li>[Thing you built #2]</li>
+              <li>Ported the game to Android</li>
+            </ul>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank">LinkedIn</a>
+        <a class="btn" href="assets/David-Mihai-Bagu-CV.pdf" target="_blank">CV</a>
+      </div>
+      <p>© David-Mihai Bagu 2026</p>
+    </div>
+  </footer>
+
 </body>
 </html>

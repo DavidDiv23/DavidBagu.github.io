@@ -1,0 +1,257 @@
+/* ===== Colors & basics — change these to restyle the whole site ===== */
+:root {
+  --bg: #1b1f2a;
+  --bg-card: #252b3a;
+  --bg-card-hover: #2d3446;
+  --text: #e6e9f0;
+  --text-muted: #9aa3b8;
+  --accent: #f2a65a;      /* main highlight color */
+  --accent-2: #6c8cd5;    /* tags / secondary */
+  --radius: 12px;
+  --max-width: 1000px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img, video { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== Header / nav ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(27, 31, 42, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #2f3647;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+.logo:hover { text-decoration: none; color: var(--accent); }
+
+nav a {
+  color: var(--text-muted);
+  margin-left: 24px;
+  font-weight: 600;
+}
+nav a:hover { color: var(--text); text-decoration: none; }
+
+/* ===== Sections ===== */
+section { padding: 64px 0; }
+
+h2.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 28px;
+  position: relative;
+  display: inline-block;
+}
+h2.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+/* ===== About ===== */
+.about {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.about-photo {
+  width: 220px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 4px solid var(--bg-card);
+}
+
+.about p { margin-bottom: 14px; color: var(--text-muted); }
+.about p strong { color: var(--text); }
+
+.socials { display: flex; gap: 12px; margin: 18px 0; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid #3a4258;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn:hover { background: var(--bg-card-hover); transform: translateY(-2px); text-decoration: none; }
+
+.btn.primary { background: var(--accent); color: #1b1f2a; border-color: var(--accent); }
+.btn.primary:hover { background: #f5b877; }
+
+/* ===== Project cards ===== */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  display: block;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--text);
+  border: 1px solid #2f3647;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.card-thumb {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
+  background: linear-gradient(135deg, #6b4226, var(--accent));
+}
+
+.card-body { padding: 18px 20px 22px; }
+.card-body h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.card-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; }
+
+/* time / tools / role info row */
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.meta span { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(108, 140, 213, 0.18);
+  color: #b9c9f0;
+}
+
+ul.contrib { padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; }
+ul.contrib li { margin-bottom: 4px; }
+
+/* ===== Project page ===== */
+.project-hero {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #6b4226, var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.project-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  align-items: start;
+}
+
+.project-layout h1 { font-size: 2.4rem; line-height: 1.2; margin-bottom: 12px; }
+.project-layout h2 { font-size: 1.4rem; margin: 32px 0 12px; }
+.project-layout p { color: var(--text-muted); margin-bottom: 14px; }
+
+.sidebar {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 22px;
+  border: 1px solid #2f3647;
+  position: sticky;
+  top: 88px;
+}
+.sidebar h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 14px 0 6px;
+}
+.sidebar h3:first-child { margin-top: 0; }
+.sidebar .btn { display: block; text-align: center; margin-top: 10px; }
+
+pre {
+  background: #12151d;
+  border: 1px solid #2f3647;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+}
+code { font-family: "JetBrains Mono", Consolas, monospace; color: #d6deeb; }
+
+.back { display: inline-block; margin: 32px 0 20px; font-weight: 600; }
+
+/* ===== Footer ===== */
+footer {
+  border-top: 1px solid #2f3647;
+  padding: 28px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+footer .socials { justify-content: center; }
+
+/* ===== Phones ===== */
+@media (max-width: 760px) {
+  .about { grid-template-columns: 1fr; }
+  .about-photo { width: 160px; margin: 0 auto; }
+  .project-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  nav a { margin-left: 14px; }
+  .project-layout h1 { font-size: 1.9rem; }
+}
