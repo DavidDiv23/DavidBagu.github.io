@@ -9,7 +9,7 @@ registerProject({
   engine: "Unity",
   team: "Solo",
   symbol: "cup",
-  theme: { accentHue: 335, neutralHue: 25 },   // pink accents, cocoa background
+  theme: { accentHue: 343, neutralHue: 22, neutralSat: 3 },   // v1.1 game colors: pink E8648A (hue 343), dark brown 2E2018 (hue 22)
   cover: "assets/img/brown-sugar-rush/01-title.png",
   hook: "Run a boba shop for one day: tap, mix, stir, slice and serve.",
   summary: "A boba shop game. It started as a PC prototype for the Game Design course, then I rebuilt it for Android with touch minigames and a customer rush. A love letter to the real boba shop T voor Thee (instagram.com/tvoorthee).",

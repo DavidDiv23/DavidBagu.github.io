@@ -59,7 +59,7 @@
     const badge = p.status === "in-development" ? "In development" : versions.length > 1 ? `${versions.length} versions` : "";
     const meta = [p.year, p.engine, p.team].filter(Boolean).join(" · ");
     return `
-      <a class="pcard" href="projects/${p.id}.html" style="--pc-accent:${c["--red"]};--pc-deep:${c["--maroon"]};--pc-glow:${c["--glow"]}">
+      <a class="pcard" href="projects/${p.id}.html" style="--pc-accent:${c["--red"]};--pc-deep:${c["--maroon"]};--pc-glow:${c["--glow"]};--pc-bg:${c["--noir"]};--pc-surface:${c["--noir-2"]};--pc-line:${c["--line"]};--pc-text:${c["--cotton"]};--pc-muted:${c["--cotton-muted"]}">
         <div class="cover">
           ${p.cover ? `<img src="${esc(url(p.cover))}" alt="" loading="lazy">` : icon(p.symbol || "wheel")}
           ${badge ? `<span class="badge">${esc(badge)}</span>` : ""}

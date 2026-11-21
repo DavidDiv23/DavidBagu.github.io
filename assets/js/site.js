@@ -97,7 +97,9 @@
     for (const [group, key] of [["accent", "accentHue"], ["neutral", "neutralHue"]]) {
       for (const [v, hex] of Object.entries(BASE[group])) {
         if (!theme || theme[key] == null) { out[v] = hex; continue; }
-        const [, s, l] = hexToHsl(hex); out[v] = hslToHex(theme[key], s, l);
+        // Optional theme.neutralSat: multiplies the saturation of the dark/light neutrals (1 = default, 3 = much more color).
+        const [, s, l] = hexToHsl(hex), boost = group === "neutral" && theme.neutralSat ? theme.neutralSat : 1;
+        out[v] = hslToHex(theme[key], Math.min(1, s * boost), l);
       }
     }
     const n = parseInt(out["--red"].slice(1), 16);
