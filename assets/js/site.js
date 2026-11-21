@@ -126,7 +126,10 @@
           <a href="${ROOT}index.html#about">About</a>
           <a href="${ROOT}index.html#news">News</a>
           <a href="${ROOT}index.html#projects">Projects</a>
-          ${S.status && S.status.show ? `<a class="pill-status" href="${ROOT}index.html#contact">${esc(S.status.text)}</a>` : ""}
+          ${S.status && S.status.show
+            ? (isHome ? `<a class="pill-status" href="#contact">${esc(S.status.text)}</a>`
+                      : `<button class="pill-status" data-open-contact aria-haspopup="dialog">${esc(S.status.text)}</button>`)
+            : ""}
         </nav>
       </div>`;
     const f = document.getElementById("site-footer");
@@ -142,6 +145,51 @@
       </div>`;
   }
 
+  /* ---------- internship / contact info: a section on the homepage, a pop-up everywhere else ---------- */
+  const isHome = !window.PROJECT_ID;
+  function contactParts() {
+    const S = window.SITE, L = S.links || {};
+    const email = L.email
+      ? `<button class="btn primary" data-copy="${esc(L.email)}" title="Copy email address"><span class="copy-email">${esc(L.email)}</span></button>`
+      : link("", "Email", "btn primary");
+    return { title: S.contact.title, text: S.contact.text, buttons: email + link(L.linkedin, "LinkedIn") + link(S.cv, "CV") };
+  }
+  let contactReturn = null;
+  function openContact() {
+    let shade = document.getElementById("contact-shade");
+    if (!shade) {
+      const c = contactParts();
+      shade = document.createElement("div");
+      shade.id = "contact-shade"; shade.className = "modal-shade"; shade.hidden = true;
+      shade.innerHTML = `
+        <div class="modal contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+          <div class="modal-top">
+            <div class="modal-title">${icon("wheel")}<span class="eyebrow">${esc(window.SITE.status.text)}</span></div>
+            <button class="close" data-close-contact aria-label="Close">✕</button>
+          </div>
+          <div class="contact-pop">
+            <h2 id="contact-title">${esc(c.title)}</h2>
+            <p>${esc(c.text)}</p>
+            <div class="btn-row">${c.buttons}</div>
+          </div>
+        </div>`;
+      document.body.appendChild(shade);
+      shade.addEventListener("click", e => { if (e.target === shade || e.target.closest("[data-close-contact]")) closeContact(); });
+    }
+    contactReturn = document.activeElement;
+    shade.hidden = false; document.body.style.overflow = "hidden";
+    shade.querySelector("[data-close-contact]").focus();
+  }
+  function closeContact() {
+    const shade = document.getElementById("contact-shade");
+    if (!shade || shade.hidden) return false;
+    shade.hidden = true; document.body.style.overflow = "";
+    contactReturn?.focus?.();
+    return true;
+  }
+  document.addEventListener("click", e => { if (e.target.closest("[data-open-contact]")) { e.preventDefault(); openContact(); } });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeContact(); });
+
   /* ---------- news: every dated version of every project ---------- */
   function collectNews() {
     const S = window.SITE, items = [];
@@ -156,5 +204,5 @@
     return items.sort((a, b) => String(b.date).localeCompare(String(a.date)));
   }
 
-  window.Site = { ROOT, ICONS, icon, esc, slug, fmtDate, url, link, highlight, toast, applyTheme, themeColors, loadProjects, renderChrome, collectNews };
+  window.Site = { ROOT, ICONS, icon, esc, slug, fmtDate, url, link, highlight, toast, applyTheme, themeColors, loadProjects, renderChrome, collectNews, contactParts, openContact };
 })();
