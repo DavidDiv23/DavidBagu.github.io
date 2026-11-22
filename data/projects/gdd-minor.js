@@ -7,7 +7,7 @@ registerProject({
   "engine": "Unity",
   "team": "Big team",
   "status": "in-development",
-  "symbol": "sun",
+  "symbol": "moon",
   "theme": null,
   "cover": "",
   "hook": "[EDIT ME: one-line hook]",
@@ -45,8 +45,9 @@ registerProject({
   ],
   "systems": {
     "main": {
+      "short": "[EDIT ME: 1-2 words]",
       "name": "[EDIT ME: one thing you built]",
-      "symbol": "sun",
+      "symbol": "moon",
       "overview": "[EDIT ME: 2 or 3 sentences about it.]",
       "media": [
         {

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Design Elements</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    /* Page-only styles for this overview. Everything else comes from the real site CSS. */
+    .ds-top { position: sticky; top: 0; z-index: 25; background: color-mix(in srgb, var(--noir) 94%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .ds-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 12px; }
+    .ds-top h1 { margin: 0; font-family: var(--display); font-size: 22px; display: flex; align-items: center; gap: 10px; }
+    .ds-top h1 svg { width: 26px; height: 26px; color: var(--brand); }
+    .themes { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--noir-2); border: 1px solid var(--line); flex-wrap: wrap; }
+    .themes button { border: 0; background: transparent; color: var(--cotton-muted); padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 13px; }
+    .themes button[aria-pressed="true"] { background: var(--cherry); color: var(--cotton); }
+    .ds main { gap: 64px; }
+    .ds-sec { display: flex; flex-direction: column; gap: 18px; }
+    .ds-note { margin: 0; font-size: 14px; color: var(--cotton-muted); max-width: 70ch; }
+    .ds-where { font-family: var(--mono); font-size: 12px; color: var(--cotton-muted); background: var(--noir-2); border: 1px solid var(--line); padding: 2px 8px; border-radius: 6px; }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); align-items: start; }
+    .tile { background: var(--noir-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .tile .label { font-size: 13px; color: var(--cotton-muted); }
+    .tile .label b { color: var(--cotton); font-weight: 600; display: block; }
+    .swatch { height: 64px; border-radius: 8px; border: 1px solid var(--line); }
+    .sizes { display: flex; align-items: flex-end; gap: 16px; color: var(--red); }
+    .sizes .s96 { width: 96px; height: 96px; } .sizes .s48 { width: 48px; height: 48px; } .sizes .s24 { width: 24px; height: 24px; }
+    .sizes svg { width: 100%; height: 100%; display: block; }
+    .wheel-opt img { width: 100%; max-width: 140px; aspect-ratio: 1; }
+    .type-row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--line); }
+    .type-row:first-child { border-top: 0; }
+    .type-row .label { font-size: 13px; color: var(--cotton-muted); }
+    .cards-row { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
+    .cards-row .tarot { width: 150px; }
+    .static-menu { position: static; width: min(340px, 100%); }
+    @media (max-width: 760px) { .type-row { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+  </style>
+</head>
+<body class="ds">
+  <div class="ds-top">
+    <div class="wrap">
+      <h1><span data-icon="wheel"></span>Design elements</h1>
+      <div class="themes" role="group" aria-label="Color theme">
+        <button data-theme="brand" aria-pressed="true">Brand red</button>
+        <button data-theme="343,22,3">Brown Sugar Rush</button>
+        <button data-theme="150,150">Green test</button>
+        <button data-theme="265,265">Purple test</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="ds"></main>
+
+  <script src="../data/site.js"></script>
+  <script src="../assets/js/site.js"></script>
+  <script>
+  (function () {
+    const { icon, esc, applyTheme, highlight } = Site;
+    document.querySelectorAll("[data-icon]").forEach(el => el.outerHTML = icon(el.dataset.icon));
+
+    const SYMBOLS = ["sword", "wand", "cup", "pentacle", "wheel"];
+    const WHEELS = [
+      ["01-classic", "Classic (on the site now)"], ["02-channels", "Channels"], ["03-fine-line", "Fine line"], ["04-bold", "Bold"],
+      ["05-serpent", "Serpent"], ["06-triple-band", "Triple band"], ["07-crescent", "Crescent"], ["08-star-heart", "Star heart"],
+      ["09-radiant", "Radiant"], ["10-sigil", "Sigil"]
+    ];
+    const COLORS = [
+      ["--noir", "Background"], ["--noir-2", "Cards"], ["--noir-3", "Raised / hover"], ["--line", "Borders"],
+      ["--cotton", "Text"], ["--cotton-muted", "Soft text"], ["--cherry", "Primary buttons"], ["--maroon", "Gradients"],
+      ["--red", "Accent pop"], ["--brand", "Logo + status dot (never changes)"]
+    ];
+    const sec = (title, note, where, body) => `
+      <section class="ds-sec">
+        <div class="section-head" style="margin:0">
+          <h2 class="section-title">${icon("wheel")}${title}</h2>
+          ${note ? `<p class="ds-note">${note}</p>` : ""}
+          ${where ? `<p><span class="ds-where">${where}</span></p>` : ""}
+        </div>
+        ${body}
+      </section>`;
+    const tarot = (state, num, label, note, sym) => `
+      <button class="tarot" ${state === "active" ? 'aria-selected="true"' : ""} ${state === "disabled" ? "disabled" : ""}>
+        <span class="inner"><span class="num">${num}</span>${icon(sym)}<span class="names"><span class="ttl">${label}</span>${note ? `<span class="sys">${note}</span>` : ""}</span></span>
+      </button>`;
+    const val = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+    function render() {
+      document.getElementById("ds").innerHTML = [
+        sec("Colors", "Every color on the site. Project pages shift the hue of all of these except the logo red. Use the buttons at the top to see a game's version.", "assets/css/site.css (top)",
+          `<div class="grid">${COLORS.map(([v, n]) => `<div class="tile"><div class="swatch" style="background:var(${v})"></div><span class="label"><b>${n}</b>${v} · ${esc(val(v))}</span></div>`).join("")}</div>`),
+
+        sec("Type", "", "",
+          `<div class="tile">
+            <div class="type-row"><span class="label">Cinzel 54 · page titles</span><span style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,54px);line-height:1.1">Brown Sugar Rush</span></div>
+            <div class="type-row"><span class="label">Cinzel 30 · section titles</span><span class="section-title">${icon("wheel")}Systems I built</span></div>
+            <div class="type-row"><span class="label">Cormorant italic · hooks</span><span class="hook">“A boba shop where every second counts”</span></div>
+            <div class="type-row"><span class="label">Inter 16 · body</span><span>I built the drink-mixing system and the day loop.</span></div>
+            <div class="type-row"><span class="label">Inter 12 caps · labels</span><span class="eyebrow">System I · The Cup</span></div>
+            <div class="type-row"><span class="label">JetBrains Mono · code</span><span style="font-family:var(--mono);font-size:14px">stateMachine.ChangeState(new ChaseState());</span></div>
+          </div>`),
+
+        sec("Tarot symbols", "Used on the tarot cards and as project-card covers. Cards use the four classic suits in order: sword, wand, cup, pentacle, then back to sword for card 5. The wheel is only the logo and section marker, never a card. Shown at 96, 48 and 24 px.", "assets/js/site.js (ICONS)",
+          `<div class="grid">${SYMBOLS.map(s => `<div class="tile"><div class="sizes"><span class="s96">${icon(s)}</span><span class="s48">${icon(s)}</span><span class="s24">${icon(s)}</span></div><span class="label"><b>${s}</b></span></div>`).join("")}</div>`),
+
+        sec("Hekate's wheel options", "The 10 candidates. Not used on the site yet except Classic. These are fixed red files, so they don't follow the theme buttons.", "design/hekate-wheels/",
+          `<div class="grid">${WHEELS.map(([f, n]) => `<div class="tile wheel-opt"><img src="hekate-wheels/hekate-wheel-${f}.svg" alt=""><span class="label"><b>${n}</b></span></div>`).join("")}</div>`),
+
+        sec("Tarot cards", "System tabs on project pages: a numeral, a suit symbol and a short label. Hover a card to see the glow.", "",
+          `<div class="cards-row">
+            ${tarot("default", "I", "NPCs", "", "sword")}
+            ${tarot("active", "II", "Weapons", "", "wand")}
+            ${tarot("disabled", "III", "Orders", "Added in v1.1", "cup")}
+            <div class="tarot back">${Site.cardBack()}</div>
+            <div class="portrait" style="width:180px"><div class="inner"><span class="num">0</span><div class="photo">${icon("wheel")}</div><span class="ttl">The Programmer</span></div></div>
+          </div>
+          <p class="ds-note">Default · Active (selected) · Not in this version · Card back (coming soon) · Homepage portrait card</p>`),
+
+        sec("Buttons, chips and pills", "", "",
+          `<div class="tile" style="gap:16px">
+            <div class="btn-row"><a class="btn primary" href="#">Play v1.1 on itch.io</a><a class="btn" href="#">View code on GitHub</a></div>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">Android</span><span class="chip accent">In development</span><button class="chip">→ StateMachine</button></div>
+            <div><span class="pill-status">Open to internships · Feb 2027</span></div>
+          </div>`),
+
+        sec("Project card", "Homepage grid. Each card takes its game's colors automatically (left: Brown Sugar Rush, right: brand red).", "",
+          `<div class="projects" style="max-width:700px">
+            ${(() => { const c = Site.themeColors({ accentHue: 343, neutralHue: 22, neutralSat: 3 }); return `<a class="pcard" href="#" style="--pc-accent:${c["--red"]};--pc-deep:${c["--maroon"]};--pc-glow:${c["--glow"]};--pc-bg:${c["--noir"]};--pc-surface:${c["--noir-2"]};--pc-line:${c["--line"]};--pc-text:${c["--cotton"]};--pc-muted:${c["--cotton-muted"]}"><div class="cover">${icon("cup")}<span class="badge">2 versions</span></div><div class="body"><h3>Brown Sugar Rush</h3><span class="meta">Year 2 · Unity</span><p>A boba shop game, remade for mobile.</p><div class="chips"><span class="chip">Unity</span><span class="chip">Android</span></div></div></a>`; })()}
+            <a class="pcard" href="#" style="--pc-accent:#D42A2A;--pc-deep:#630000;--pc-glow:rgba(212,42,42,.42);--pc-bg:#1B1717;--pc-surface:#231E1E;--pc-line:#3D3333;--pc-text:#EDEBDD;--pc-muted:#B3AC9F"><div class="cover">${icon("blade")}<span class="badge">In development</span></div><div class="body"><h3>Theseus Protocol</h3><span class="meta">Current · Unity</span><p>A robot gains other robots' parts during a war.</p><div class="chips"><span class="chip">Narrative design</span></div></div></a>
+          </div>`),
+
+        sec("News item", "", "",
+          `<div class="news" style="max-width:760px"><a class="news-item" href="#"><time>Oct 2026</time><span class="what"><b>Brown Sugar Rush: v1.1 · Mobile remake</b><span>Remade for mobile (Android)</span></span><span class="tag">New version</span></a></div>`),
+
+        sec("Version picker", "", "",
+          `<div class="cards-row">
+            <div class="version"><button class="version-btn">${icon("moon", "moon")}<span class="vtext"><span class="vlabel">Version</span><span class="vname">v1.1 · Mobile remake (latest)</span></span>${icon("chev")}</button></div>
+            <div class="version-menu static-menu">
+              <button class="version-item"><span><span class="vn">v1.0 · PC prototype</span><span class="vd">Game Design course · PC</span></span></button>
+              <button class="version-item" aria-current="true"><span><span class="vn">v1.1 · Mobile remake</span><span class="vd">Android</span></span><span class="tick">✓</span></button>
+              <button class="version-item" disabled><span><span class="vn">v1.2 · Next update</span><span class="vd">Coming soon</span></span></button>
+            </div>
+          </div>`),
+
+        sec("Media and code", "", "",
+          `<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))">
+            <div class="media">${icon("play")}<span>Gameplay video placeholder</span></div>
+            <pre class="code"><code>${highlight("// Called by PlayerDetector\npublic void OnPlayerSeen(Transform player)\n{\n    agent.speed = chaseSpeed;\n    stateMachine.ChangeState(new ChaseState(player));\n}")}</code></pre>
+          </div>`)
+      ].join("");
+    }
+
+    document.querySelector(".themes").addEventListener("click", e => {
+      const b = e.target.closest("[data-theme]"); if (!b) return;
+      document.querySelectorAll(".themes button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      const t = b.dataset.theme === "brand" ? null : (([a, n, s]) => ({ accentHue: +a, neutralHue: +n, neutralSat: s ? +s : undefined }))(b.dataset.theme.split(","));
+      applyTheme(t); render();
+    });
+    render();
+  })();
+  </script>
+</body>
+</html>

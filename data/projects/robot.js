@@ -6,7 +6,7 @@ registerProject({
   "course": "",
   "engine": "[Hardware and language]",
   "team": "[CHECK]",
-  "symbol": "key",
+  "symbol": "wand",
   "theme": null,
   "cover": "",
   "hook": "[EDIT ME: one-line hook]",
@@ -14,12 +14,7 @@ registerProject({
   "cardChips": [
     "Robotics"
   ],
-  "links": [
-    {
-      "label": "View code on GitHub",
-      "url": ""
-    }
-  ],
+  "links": [],
   "versions": [
     {
       "id": "v1-0",
@@ -55,8 +50,9 @@ registerProject({
   ],
   "systems": {
     "main": {
+      "short": "[EDIT ME: 1-2 words]",
       "name": "[EDIT ME: one thing you built]",
-      "symbol": "key",
+      "symbol": "wand",
       "overview": "[EDIT ME: 2 or 3 sentences about it.]",
       "media": [
         {

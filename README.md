@@ -41,4 +41,4 @@ scripts: { WeaponController: { role: "equips & fires", resp: "…", code: `…`,
 
 **Brand new project:** copy a file in `data/projects/`, copy a page in `projects/` and change the id in it, then add the id to `projects` in `data/site.js`.
 
-Tarot symbols: `wheel`, `moon`, `key`, `blade`, `cup`, `star`, `eye`, `sun`.
+Tarot cards: each system has a `numeral` (I, II, III…) and a `short` label of one or two words ("Drinks", "NPCs", "Weapons"). The suit symbol is automatic, by the card's position: 1 sword, 2 wand, 3 cup, 4 pentacle, 5 sword again, and so on. Project-card covers without an image follow the same order. `symbol` in the data is ignored for now. The wheel is the logo, never a card.

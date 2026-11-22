@@ -70,7 +70,7 @@ registerProject({
   systems: {
     /* ───────────── v1.0 ───────────── */
     "drink-mixing": {
-      numeral: "I", card: "The Cup", name: "Drink mixing", symbol: "cup",
+      numeral: "I", short: "Drinks", name: "Drink mixing", symbol: "cup",
       tags: { all: ["v1.0", "UI", "Data-driven"] },
       overview: "A customer asks for a drink. You build it one step at a time: size, drink type, boba, ice, sugar, milk and cream. Each choice changes the picture of the cup right away. When you serve, the game checks your cup against the order.",
       media: [{ caption: "Mixing a drink: video" }, { caption: "The cup changes with each step: GIF" }],
@@ -161,7 +161,7 @@ public enum BobaType { None, Tapioca, Strawberry, Lychee, Mango }`
 
     /* ───────────── v1.1 ───────────── */
     "mix-station": {
-      numeral: "I", card: "The Cup", name: "Mix station", symbol: "cup",
+      numeral: "I", short: "Mixing", name: "Mix station", symbol: "cup",
       tags: { all: ["v1.1", "Gameplay", "Touch UI", "Data-driven"] },
       overview: "Every drink is made at the mix station in four steps: Tea, Fruit, Toppings and Assembly. You drag things from the tray into the cup, and the order you drop them in matters. When you finish, the game checks the liquids, the sugar level, the syrup and the order of the cup.",
       media: [
@@ -276,7 +276,7 @@ public class DrinkRecipe : ScriptableObject
     },
 
     "day-and-rush": {
-      numeral: "II", card: "The Sun", name: "Day and customer rush", symbol: "sun",
+      numeral: "II", short: "Customers", name: "Day and customer rush", symbol: "sun",
       tags: { all: ["v1.1", "Gameplay", "Balance"] },
       overview: "One shop day is about six minutes. You tap the sign to open the shop and a clock counts down. Customers arrive in a queue of up to three. Fast, correct drinks earn tips, and tips bring customers faster. Wrong drinks slow them down. That is the only punishment. At closing time you tap the sign again and see your stats.",
       media: [
@@ -333,7 +333,7 @@ public int maxQueue = 3;`
     },
 
     "touch-minigames": {
-      numeral: "III", card: "The Moon", name: "Touch minigames", symbol: "moon",
+      numeral: "III", short: "Minigames", name: "Touch minigames", symbol: "moon",
       tags: { all: ["v1.1", "Mobile", "Touch input"] },
       overview: "Slicing fruit, stirring tapioca, drizzling syrup and measuring powder are short touch minigames. Each one gives a score from 0 to 1. A sloppy score only lowers the tip. It never fails the drink. The same code works with touch and with a mouse.",
       media: [

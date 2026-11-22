@@ -96,8 +96,9 @@
   /* ---------- render ---------- */
   function render() {
     document.getElementById("version-name").textContent = version.name + (multiVersion && version === latest && playable.length > 1 ? " (latest)" : "");
-    const chips = [...(P.status === "in-development" ? ["In development"] : []), ...(version.chips || P.chips || [])];
-    document.getElementById("meta-chips").innerHTML = chips.map((c, i) => `<span class="chip ${P.status === "in-development" && i === 0 ? "accent" : ""}">${esc(c)}</span>`).join("");
+    const statusLabel = { "in-development": "In development", "coming-soon": "Coming soon" }[P.status];
+    const chips = [...(statusLabel ? [statusLabel] : []), ...(version.chips || P.chips || [])];
+    document.getElementById("meta-chips").innerHTML = chips.map((c, i) => `<span class="chip ${statusLabel && i === 0 ? "accent" : ""}">${esc(c)}</span>`).join("");
     document.getElementById("trailer").innerHTML = media(version.trailer, `Gameplay video: ${version.name}`);
     document.getElementById("glance").innerHTML = (version.glance || P.glance || []).map(g => `<li>${esc(g)}</li>`).join("");
     const play = version.play || P.play;
@@ -147,14 +148,17 @@
 
   function renderTabs() {
     const avail = sysIn(version);
-    document.getElementById("tabs").innerHTML = allSystemIds.map(sid => {
+    document.getElementById("tabs").innerHTML = allSystemIds.map((sid, i) => {
       const s = systems[sid], ok = avail.includes(sid);
-      const later = P.versions.find(v => (v.systems || []).includes(sid));
+      const cur = P.versions.indexOf(version);
+      const homes = P.versions.filter(v => (v.systems || []).includes(sid));
+      const later = homes.find(v => P.versions.indexOf(v) > cur);
+      const note = later ? "Added in " + later.name.split(" ")[0] : homes.length ? "Only in " + homes.map(v => v.name.split(" ")[0]).join(", ") : "Not in this version";
       return `<button class="tarot" role="tab" id="tab-${esc(sid)}" data-system="${esc(sid)}" aria-selected="${sid === systemId}" aria-controls="system" ${ok ? "" : "disabled"} title="${ok ? "Open " + esc(s.name) : "Not in this version"}">
-        <span class="inner"><span class="num">${esc(s.numeral || "")}</span>${icon(s.symbol)}<span class="names"><span class="ttl">${esc(s.card || "")}</span><span class="sys">${ok ? esc(s.name) : "Added in " + esc(later ? later.name.split(" ")[0] : "a later version")}</span></span></span>
+        <span class="inner"><span class="num">${esc(s.numeral || "")}</span>${icon(Site.cardSuit(i))}<span class="names"><span class="ttl">${esc(Site.cardLabel(s))}</span>${ok ? "" : `<span class="sys">${esc(note)}</span>`}</span></span>
       </button>`;
     }).join("") + (P.upcoming || []).map(u => `
-      <div class="tarot placeholder" aria-hidden="true"><span class="inner"><span class="num">${esc(u.numeral || "")}</span>${icon(u.symbol)}<span class="names"><span class="ttl">${esc(u.card || "")}</span><span class="sys">${esc(u.name || "")}</span></span></span></div>`).join("");
+      <div class="tarot back" title="${esc(u.name ? u.name + ": coming soon" : "Coming soon")}" aria-hidden="true">${Site.cardBack()}</div>`).join("");
   }
 
   /* ---------- class diagram: 7 fixed slots, any of them can be left out ---------- */
@@ -199,7 +203,7 @@
     el.setAttribute("aria-labelledby", "tab-" + systemId);
     el.innerHTML = `
       <div class="sys-head">
-        ${sys.numeral || sys.card ? `<p class="eyebrow">${esc(["System " + (sys.numeral || ""), sys.card].filter(Boolean).join(" · "))}</p>` : ""}
+        ${sys.numeral ? `<p class="eyebrow">System ${esc(sys.numeral)}</p>` : ""}
         <h2>${esc(sys.name)}</h2>
         <div class="chips">${tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}</div>
       </div>
@@ -219,7 +223,7 @@
       </div>` : ""}
       ${order.length > 1 ? `<div class="sys-nav">
         <button class="btn" data-goto="systems">← All systems</button>
-        ${next ? `<button class="btn primary" data-goto-system="${esc(next)}">Next: ${esc(systems[next].numeral || "")} · ${esc(systems[next].card || systems[next].name)} →</button>` : ""}
+        ${next ? `<button class="btn primary" data-goto-system="${esc(next)}">Next: ${esc(Site.cardLabel(systems[next]))} →</button>` : ""}
       </div>` : ""}`;
   }
 

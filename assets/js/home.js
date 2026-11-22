@@ -53,15 +53,16 @@
     </div>`;
 
   /* ---------- projects ---------- */
-  const cards = S.projects.map(id => window.PROJECTS[id]).filter(Boolean).map(p => {
+  const cards = S.projects.map(id => window.PROJECTS[id]).filter(Boolean).map((p, i) => {
     const c = themeColors(p.theme);
     const versions = (p.versions || []).filter(v => !v.planned);
-    const badge = p.status === "in-development" ? "In development" : versions.length > 1 ? `${versions.length} versions` : "";
+    const STATUS = { "in-development": "In development", "coming-soon": "Coming soon" };
+    const badge = STATUS[p.status] || (versions.length > 1 ? `${versions.length} versions` : "");
     const meta = [p.year, p.engine, p.team].filter(Boolean).join(" · ");
     return `
       <a class="pcard" href="projects/${p.id}.html" style="--pc-accent:${c["--red"]};--pc-deep:${c["--maroon"]};--pc-glow:${c["--glow"]};--pc-bg:${c["--noir"]};--pc-surface:${c["--noir-2"]};--pc-line:${c["--line"]};--pc-text:${c["--cotton"]};--pc-muted:${c["--cotton-muted"]}">
         <div class="cover">
-          ${p.cover ? `<img src="${esc(url(p.cover))}" alt="" loading="lazy">` : icon(p.symbol || "wheel")}
+          ${p.cover ? `<img src="${esc(url(p.cover))}" alt="" loading="lazy">` : icon(Site.cardSuit(i))}
           ${badge ? `<span class="badge">${esc(badge)}</span>` : ""}
         </div>
         <div class="body">
